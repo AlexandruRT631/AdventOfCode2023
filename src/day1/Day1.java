@@ -6,10 +6,10 @@ import java.util.Scanner;
 
 public class Day1 {
     public static void solve() throws IOException {
-        File file = new File("src/day1/part1.txt");
+        File file = new File("src/day1/input.txt");
         Scanner in = new Scanner(file);
         int sum = 0;
-        String numbers[] = {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"};
+        String[] numbers = {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"};
 
         while (in.hasNextLine()) {
             String line = in.nextLine();
@@ -36,7 +36,7 @@ public class Day1 {
                 }
 
                 int lastPosition = line.lastIndexOf(numbers[i]);
-                if (lastPosition != -1 && (lastPosition > lastDigitIndex || lastDigitIndex == -1)) {
+                if (lastPosition != -1 && lastPosition > lastDigitIndex) {
                     lastDigit = i;
                     lastDigitIndex = lastPosition;
                 }
