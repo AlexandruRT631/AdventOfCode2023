@@ -1,11 +1,14 @@
 package day1;
 
+import iDay.IDay;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class Day1 {
-    public static void solve() throws IOException {
+public class Day1 implements IDay {
+    @Override
+    public void part1() throws IOException {
         File file = new File("src/day1/input.txt");
         Scanner in = new Scanner(file);
         int sum = 0;
@@ -45,5 +48,10 @@ public class Day1 {
             sum += firstDigit * 10 + lastDigit;
         }
         System.out.println(sum);
+    }
+
+    @Override
+    public void part2() throws IOException {
+        part1();
     }
 }

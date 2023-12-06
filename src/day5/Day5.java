@@ -1,53 +1,49 @@
 package day5;
 
+import iDay.IDay;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
-class Range {
-    private long start;
-    private long end;
-
-    public Range(long start, long end) {
-        this.start = start;
-        this.end = end;
+public class Day5 implements IDay {
+    private static List<Range> transform(List<Range> ranges, List<Map> maps) {
+        List<Range> result = new ArrayList<>();
+        for (Range r : ranges) {
+            List<Range> tempRanges = new ArrayList<>();
+            tempRanges.add(r);
+            for (Map m : maps) {
+                List<Range> newTempRanges = new ArrayList<>();
+                for (Range tempRange: tempRanges) {
+                    if (tempRange.getStart() < m.getSourceStart() && tempRange.getEnd() <= m.getSourceEnd() && m.getSourceStart() < tempRange.getEnd()) {
+                        newTempRanges.add(new Range(tempRange.getStart(), m.getSourceStart() - 1));
+                        result.add(new Range(m.getSourceStart() + m.getIncrement(), tempRange.getEnd() + m.getIncrement()));
+                    }
+                    else if (m.getSourceStart() < tempRange.getStart() && m.getSourceEnd() <= tempRange.getEnd() && tempRange.getStart() < m.getSourceEnd()) {
+                        result.add(new Range(tempRange.getStart() + m.getIncrement(), tempRange.getEnd() + m.getIncrement()));
+                        newTempRanges.add(new Range(m.getSourceEnd() + 1, tempRange.getEnd()));
+                    }
+                    else if (m.getSourceStart() <= tempRange.getStart() && tempRange.getEnd() <= m.getSourceEnd()) {
+                        result.add(new Range(tempRange.getStart() + m.getIncrement(), tempRange.getEnd() + m.getIncrement()));
+                    }
+                    else if (tempRange.getStart() <= m.getSourceStart() && m.getSourceEnd() <= tempRange.getEnd()) {
+                        newTempRanges.add(new Range(tempRange.getStart(), m.getSourceStart() - 1));
+                        result.add(new Range(m.getSourceStart() + m.getIncrement(), m.getSourceEnd() + m.getIncrement()));
+                        newTempRanges.add(new Range(m.getSourceEnd() + 1, tempRange.getEnd()));
+                    }
+                    else {
+                        newTempRanges.add(tempRange);
+                    }
+                }
+                tempRanges = new ArrayList<>(newTempRanges);
+            }
+            result.addAll(tempRanges);
+        }
+        return result;
     }
 
-    public long getStart() {
-        return start;
-    }
-
-    public long getEnd() {
-        return end;
-    }
-}
-
-class Map {
-    private long sourceStart;
-    private long sourceEnd;
-    private long increment;
-
-    public Map(long sourceStart, long sourceEnd, long increment) {
-        this.sourceStart = sourceStart;
-        this.sourceEnd = sourceEnd;
-        this.increment = increment;
-    }
-
-    public long getSourceStart() {
-        return sourceStart;
-    }
-
-    public long getSourceEnd() {
-        return sourceEnd;
-    }
-
-    public long getIncrement() {
-        return increment;
-    }
-}
-
-public class Day5 {
-    public static void part1() throws IOException {
+    @Override
+    public void part1() throws IOException {
         File file = new File("src/day5/input.txt");
         Scanner in = new Scanner(file);
 
@@ -85,42 +81,8 @@ public class Day5 {
         locations.stream().min(Long::compareTo).ifPresent(System.out::println);
     }
 
-    private static List<Range> transform(List<Range> ranges, List<Map> maps) {
-        List<Range> result = new ArrayList<>();
-        for (Range r : ranges) {
-            List<Range> tempRanges = new ArrayList<>();
-            tempRanges.add(r);
-            for (Map m : maps) {
-                List<Range> newTempRanges = new ArrayList<>();
-                for (Range tempRange: tempRanges) {
-                    if (tempRange.getStart() < m.getSourceStart() && tempRange.getEnd() <= m.getSourceEnd() && m.getSourceStart() < tempRange.getEnd()) {
-                        newTempRanges.add(new Range(tempRange.getStart(), m.getSourceStart() - 1));
-                        result.add(new Range(m.getSourceStart() + m.getIncrement(), tempRange.getEnd() + m.getIncrement()));
-                    }
-                    else if (m.getSourceStart() < tempRange.getStart() && m.getSourceEnd() <= tempRange.getEnd() && tempRange.getStart() < m.getSourceEnd()) {
-                        result.add(new Range(tempRange.getStart() + m.getIncrement(), tempRange.getEnd() + m.getIncrement()));
-                        newTempRanges.add(new Range(m.getSourceEnd() + 1, tempRange.getEnd()));
-                    }
-                    else if (m.getSourceStart() <= tempRange.getStart() && tempRange.getEnd() <= m.getSourceEnd()) {
-                        result.add(new Range(tempRange.getStart() + m.getIncrement(), tempRange.getEnd() + m.getIncrement()));
-                    }
-                    else if (tempRange.getStart() <= m.getSourceStart() && m.getSourceEnd() <= tempRange.getEnd()) {
-                        newTempRanges.add(new Range(tempRange.getStart(), m.getSourceStart() - 1));
-                        result.add(new Range(m.getSourceStart() + m.getIncrement(), m.getSourceEnd() + m.getIncrement()));
-                        newTempRanges.add(new Range(m.getSourceEnd() + 1, tempRange.getEnd()));
-                    }
-                    else {
-                        newTempRanges.add(tempRange);
-                    }
-                }
-                tempRanges = new ArrayList<>(newTempRanges);
-            }
-            result.addAll(tempRanges);
-        }
-        return result;
-    }
-
-    public static void part2() throws IOException {
+    @Override
+    public void part2() throws IOException {
         File file = new File("src/day5/input.txt");
         Scanner in = new Scanner(file);
 

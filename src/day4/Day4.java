@@ -1,13 +1,16 @@
 package day4;
 
+import iDay.IDay;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-public class Day4 {
-    public static void part1() throws IOException {
+public class Day4 implements IDay {
+    @Override
+    public void part1() throws IOException {
         File file = new File("src/day4/input.txt");
         Scanner in = new Scanner(file);
 
@@ -23,7 +26,8 @@ public class Day4 {
         System.out.println(totalPoints);
     }
 
-    public static void part2() throws IOException {
+    @Override
+    public void part2() throws IOException {
         File file = new File("src/day4/input.txt");
         Scanner in = new Scanner(file);
 

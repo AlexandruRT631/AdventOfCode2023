@@ -1,12 +1,15 @@
 package day6;
 
+import iDay.IDay;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class Day6 {
-    public static void part1() throws IOException {
+public class Day6 implements IDay {
+    @Override
+    public void part1() throws IOException {
         File file = new File("src/day6/input.txt");
         Scanner in = new Scanner(file);
 
@@ -33,7 +36,8 @@ public class Day6 {
         System.out.println(ways);
     }
 
-    public static void part2() throws IOException {
+    @Override
+    public void part2() throws IOException {
         File file = new File("src/day6/input.txt");
         Scanner in = new Scanner(file);
 
