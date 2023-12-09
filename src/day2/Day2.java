@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class Day2 implements IDay {
     @Override
-    public void part1() throws IOException {
+    public long part1() throws IOException {
         File file = new File("src/day2/input.txt");
         Scanner in = new Scanner(file);
 
@@ -55,11 +55,11 @@ public class Day2 implements IDay {
             }
         }
 
-        System.out.println(sum);
+        return sum;
     }
 
     @Override
-    public void part2() throws IOException {
+    public long part2() throws IOException {
         File file = new File("src/day2/input.txt");
         Scanner in = new Scanner(file);
 
@@ -92,9 +92,9 @@ public class Day2 implements IDay {
                 }
             }
 
-            sum += maxRed * maxGreen * maxBlue;
+            sum += (long) maxRed * maxGreen * maxBlue;
         }
 
-        System.out.println(sum);
+        return sum;
     }
 }

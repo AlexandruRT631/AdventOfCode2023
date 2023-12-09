@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class Day4 implements IDay {
     @Override
-    public void part1() throws IOException {
+    public long part1() throws IOException {
         File file = new File("src/day4/input.txt");
         Scanner in = new Scanner(file);
 
@@ -20,14 +20,14 @@ public class Day4 implements IDay {
             int winningNumbersCount = computeWinningNumberCount(line);
 
             // if winningNumberCount is 0, pow(2, -1) = 0.5, which converts to 0 points
-            totalPoints += Math.pow(2, winningNumbersCount - 1);
+            totalPoints += (int) Math.pow(2, winningNumbersCount - 1);
         }
 
-        System.out.println(totalPoints);
+        return totalPoints;
     }
 
     @Override
-    public void part2() throws IOException {
+    public long part2() throws IOException {
         File file = new File("src/day4/input.txt");
         Scanner in = new Scanner(file);
 
@@ -50,7 +50,7 @@ public class Day4 implements IDay {
             totalScratchcards += currentMultiplier + 1;
         }
 
-        System.out.println(totalScratchcards);
+        return totalScratchcards;
     }
 
     private static int computeWinningNumberCount(String line) {

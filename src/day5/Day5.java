@@ -7,43 +7,8 @@ import java.io.IOException;
 import java.util.*;
 
 public class Day5 implements IDay {
-    private static List<Range> transform(List<Range> ranges, List<Map> maps) {
-        List<Range> result = new ArrayList<>();
-        for (Range r : ranges) {
-            List<Range> tempRanges = new ArrayList<>();
-            tempRanges.add(r);
-            for (Map m : maps) {
-                List<Range> newTempRanges = new ArrayList<>();
-                for (Range tempRange: tempRanges) {
-                    if (tempRange.getStart() < m.getSourceStart() && tempRange.getEnd() <= m.getSourceEnd() && m.getSourceStart() < tempRange.getEnd()) {
-                        newTempRanges.add(new Range(tempRange.getStart(), m.getSourceStart() - 1));
-                        result.add(new Range(m.getSourceStart() + m.getIncrement(), tempRange.getEnd() + m.getIncrement()));
-                    }
-                    else if (m.getSourceStart() < tempRange.getStart() && m.getSourceEnd() <= tempRange.getEnd() && tempRange.getStart() < m.getSourceEnd()) {
-                        result.add(new Range(tempRange.getStart() + m.getIncrement(), tempRange.getEnd() + m.getIncrement()));
-                        newTempRanges.add(new Range(m.getSourceEnd() + 1, tempRange.getEnd()));
-                    }
-                    else if (m.getSourceStart() <= tempRange.getStart() && tempRange.getEnd() <= m.getSourceEnd()) {
-                        result.add(new Range(tempRange.getStart() + m.getIncrement(), tempRange.getEnd() + m.getIncrement()));
-                    }
-                    else if (tempRange.getStart() <= m.getSourceStart() && m.getSourceEnd() <= tempRange.getEnd()) {
-                        newTempRanges.add(new Range(tempRange.getStart(), m.getSourceStart() - 1));
-                        result.add(new Range(m.getSourceStart() + m.getIncrement(), m.getSourceEnd() + m.getIncrement()));
-                        newTempRanges.add(new Range(m.getSourceEnd() + 1, tempRange.getEnd()));
-                    }
-                    else {
-                        newTempRanges.add(tempRange);
-                    }
-                }
-                tempRanges = new ArrayList<>(newTempRanges);
-            }
-            result.addAll(tempRanges);
-        }
-        return result;
-    }
-
     @Override
-    public void part1() throws IOException {
+    public long part1() throws IOException {
         File file = new File("src/day5/input.txt");
         Scanner in = new Scanner(file);
 
@@ -78,11 +43,11 @@ public class Day5 implements IDay {
             map = in.nextLine();
         }
 
-        locations.stream().min(Long::compareTo).ifPresent(System.out::println);
+        return locations.stream().min(Long::compareTo).orElseThrow();
     }
 
     @Override
-    public void part2() throws IOException {
+    public long part2() throws IOException {
         File file = new File("src/day5/input.txt");
         Scanner in = new Scanner(file);
 
@@ -125,6 +90,41 @@ public class Day5 implements IDay {
             }
         }
 
-        System.out.println(min);
+        return min;
+    }
+
+    private static List<Range> transform(List<Range> ranges, List<Map> maps) {
+        List<Range> result = new ArrayList<>();
+        for (Range r : ranges) {
+            List<Range> tempRanges = new ArrayList<>();
+            tempRanges.add(r);
+            for (Map m : maps) {
+                List<Range> newTempRanges = new ArrayList<>();
+                for (Range tempRange: tempRanges) {
+                    if (tempRange.getStart() < m.getSourceStart() && tempRange.getEnd() <= m.getSourceEnd() && m.getSourceStart() < tempRange.getEnd()) {
+                        newTempRanges.add(new Range(tempRange.getStart(), m.getSourceStart() - 1));
+                        result.add(new Range(m.getSourceStart() + m.getIncrement(), tempRange.getEnd() + m.getIncrement()));
+                    }
+                    else if (m.getSourceStart() < tempRange.getStart() && m.getSourceEnd() <= tempRange.getEnd() && tempRange.getStart() < m.getSourceEnd()) {
+                        result.add(new Range(tempRange.getStart() + m.getIncrement(), tempRange.getEnd() + m.getIncrement()));
+                        newTempRanges.add(new Range(m.getSourceEnd() + 1, tempRange.getEnd()));
+                    }
+                    else if (m.getSourceStart() <= tempRange.getStart() && tempRange.getEnd() <= m.getSourceEnd()) {
+                        result.add(new Range(tempRange.getStart() + m.getIncrement(), tempRange.getEnd() + m.getIncrement()));
+                    }
+                    else if (tempRange.getStart() <= m.getSourceStart() && m.getSourceEnd() <= tempRange.getEnd()) {
+                        newTempRanges.add(new Range(tempRange.getStart(), m.getSourceStart() - 1));
+                        result.add(new Range(m.getSourceStart() + m.getIncrement(), m.getSourceEnd() + m.getIncrement()));
+                        newTempRanges.add(new Range(m.getSourceEnd() + 1, tempRange.getEnd()));
+                    }
+                    else {
+                        newTempRanges.add(tempRange);
+                    }
+                }
+                tempRanges = new ArrayList<>(newTempRanges);
+            }
+            result.addAll(tempRanges);
+        }
+        return result;
     }
 }

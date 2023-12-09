@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class Day1 implements IDay {
     @Override
-    public void part1() throws IOException {
+    public long part1() throws IOException {
         File file = new File("src/day1/input.txt");
         Scanner in = new Scanner(file);
         int sum = 0;
@@ -47,11 +47,11 @@ public class Day1 implements IDay {
 
             sum += firstDigit * 10 + lastDigit;
         }
-        System.out.println(sum);
+        return sum;
     }
 
     @Override
-    public void part2() throws IOException {
-        part1();
+    public long part2() throws IOException {
+        return part1();
     }
 }

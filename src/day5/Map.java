@@ -1,9 +1,9 @@
 package day5;
 
 public class Map {
-    private long sourceStart;
-    private long sourceEnd;
-    private long increment;
+    private final long sourceStart;
+    private final long sourceEnd;
+    private final long increment;
 
     public Map(long sourceStart, long sourceEnd, long increment) {
         this.sourceStart = sourceStart;

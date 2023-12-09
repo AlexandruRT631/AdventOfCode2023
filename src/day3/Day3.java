@@ -8,37 +8,8 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class Day3 implements IDay {
-    private static char[][] reduceSize(char[][] grid, int x, int y) {
-        char[][] newGrid = new char[x][y];
-        for (int i = 0; i < x; i++) {
-            newGrid[i] = Arrays.copyOf(grid[i], y);
-        }
-        return newGrid;
-    }
-
-    private static boolean checkForNeighbouringSymbol(char[][] grid, int start, int end, int row) {
-        if (row != 0) {
-            for (int i = Integer.max(start - 1, 0); i <= Integer.min(end + 1, grid[row].length - 1); i++) {
-                if (grid[row - 1][i] != '.' && (grid[row - 1][i] < '0' || grid[row - 1][i] > '9')) {
-                    return true;
-                }
-            }
-        }
-        if (row != grid.length - 1) {
-            for (int i = Integer.max(start - 1, 0); i <= Integer.min(end + 1, grid[row].length - 1); i++) {
-                if (grid[row + 1][i] != '.' && (grid[row + 1][i] < '0' || grid[row + 1][i] > '9')) {
-                    return true;
-                }
-            }
-        }
-        if (start - 1 >= 0 && grid[row][start - 1] != '.' && (grid[row][start - 1] < '0' || grid[row][start - 1] > '9')) {
-            return true;
-        }
-        return end + 1 < grid[row].length && grid[row][end + 1] != '.' && (grid[row][end + 1] < '0' || grid[row][end + 1] > '9');
-    }
-
     @Override
-    public void part1() throws IOException {
+    public long part1() throws IOException {
         File file = new File("src/day3/input.txt");
         Scanner in = new Scanner(file);
         int sum = 0;
@@ -85,11 +56,11 @@ public class Day3 implements IDay {
             }
         }
 
-        System.out.println(sum);
+        return sum;
     }
 
     @Override
-    public void part2() throws IOException {
+    public long part2() throws IOException {
         File file = new File("src/day3/input.txt");
         Scanner in = new Scanner(file);
         int sum = 0;
@@ -219,6 +190,35 @@ public class Day3 implements IDay {
             }
         }
 
-        System.out.println(sum);
+        return sum;
+    }
+
+    private static char[][] reduceSize(char[][] grid, int x, int y) {
+        char[][] newGrid = new char[x][y];
+        for (int i = 0; i < x; i++) {
+            newGrid[i] = Arrays.copyOf(grid[i], y);
+        }
+        return newGrid;
+    }
+
+    private static boolean checkForNeighbouringSymbol(char[][] grid, int start, int end, int row) {
+        if (row != 0) {
+            for (int i = Integer.max(start - 1, 0); i <= Integer.min(end + 1, grid[row].length - 1); i++) {
+                if (grid[row - 1][i] != '.' && (grid[row - 1][i] < '0' || grid[row - 1][i] > '9')) {
+                    return true;
+                }
+            }
+        }
+        if (row != grid.length - 1) {
+            for (int i = Integer.max(start - 1, 0); i <= Integer.min(end + 1, grid[row].length - 1); i++) {
+                if (grid[row + 1][i] != '.' && (grid[row + 1][i] < '0' || grid[row + 1][i] > '9')) {
+                    return true;
+                }
+            }
+        }
+        if (start - 1 >= 0 && grid[row][start - 1] != '.' && (grid[row][start - 1] < '0' || grid[row][start - 1] > '9')) {
+            return true;
+        }
+        return end + 1 < grid[row].length && grid[row][end + 1] != '.' && (grid[row][end + 1] < '0' || grid[row][end + 1] > '9');
     }
 }

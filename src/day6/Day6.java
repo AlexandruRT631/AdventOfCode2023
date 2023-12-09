@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class Day6 implements IDay {
     @Override
-    public void part1() throws IOException {
+    public long part1() throws IOException {
         File file = new File("src/day6/input.txt");
         Scanner in = new Scanner(file);
 
@@ -33,11 +33,11 @@ public class Day6 implements IDay {
             ways *= way;
         }
 
-        System.out.println(ways);
+        return ways;
     }
 
     @Override
-    public void part2() throws IOException {
+    public long part2() throws IOException {
         File file = new File("src/day6/input.txt");
         Scanner in = new Scanner(file);
 
@@ -57,6 +57,6 @@ public class Day6 implements IDay {
             }
         }
 
-        System.out.println(waysToWin);
+        return waysToWin;
     }
 }

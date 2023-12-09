@@ -3,7 +3,7 @@ package iDay;
 import java.io.IOException;
 
 public interface IDay {
-    void part1() throws IOException;
+    long part1() throws IOException;
 
-    void part2() throws IOException;
+    long part2() throws IOException;
 }
