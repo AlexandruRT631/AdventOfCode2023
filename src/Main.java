@@ -6,13 +6,14 @@ import day5.Day5;
 import day6.Day6;
 import day7.Day7;
 import day8.Day8;
+import day9.Day9;
 import iDay.IDay;
 
 import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        IDay day = new Day8();
+        IDay day = new Day9();
         System.out.println(day.part2());
     }
 }
