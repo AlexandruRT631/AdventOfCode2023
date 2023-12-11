@@ -1,32 +1,22 @@
-package day3;
+package day03;
 
 import iDay.IDay;
+import utilities.CharMap;
+import utilities.Util;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class Day3 implements IDay {
+public class Day03 implements IDay {
     @Override
     public long part1() throws IOException {
-        File file = new File("src/day3/input.txt");
-        Scanner in = new Scanner(file);
+        CharMap charMap = Util.getCharMap("src/day03/input.txt");
+        int x = charMap.x();
+        int y = charMap.y();
+        char[][] grid = reduceSize(charMap.map(), x, y);
         int sum = 0;
-
-        char[][] grid = new char[1000][1000];
-        int x = 0;
-        int y = 0;
-        while (in.hasNextLine()) {
-            y = 0;
-            String line = in.nextLine();
-            for (char c : line.toCharArray()) {
-                grid[x][y] = c;
-                y++;
-            }
-            x++;
-        }
-        grid = reduceSize(grid, x, y);
 
         boolean isNumber = false;
         int number = 0;
@@ -61,23 +51,11 @@ public class Day3 implements IDay {
 
     @Override
     public long part2() throws IOException {
-        File file = new File("src/day3/input.txt");
-        Scanner in = new Scanner(file);
+        CharMap charMap = Util.getCharMap("src/day03/input.txt");
+        int x = charMap.x();
+        int y = charMap.y();
+        char[][] grid = reduceSize(charMap.map(), x, y);
         int sum = 0;
-
-        char[][] grid = new char[1000][1000];
-        int x = 0;
-        int y = 0;
-        while (in.hasNextLine()) {
-            y = 0;
-            String line = in.nextLine();
-            for (char c : line.toCharArray()) {
-                grid[x][y] = c;
-                y++;
-            }
-            x++;
-        }
-        grid = reduceSize(grid, x, y);
 
         boolean[][] checked = new boolean[x][y];
         for (int i = 0; i < x; i++) {

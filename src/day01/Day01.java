@@ -1,4 +1,4 @@
-package day1;
+package day01;
 
 import iDay.IDay;
 
@@ -6,10 +6,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class Day1 implements IDay {
+public class Day01 implements IDay {
     @Override
     public long part1() throws IOException {
-        File file = new File("src/day1/input.txt");
+        File file = new File("src/day01/input.txt");
         Scanner in = new Scanner(file);
         int sum = 0;
         String[] numbers = {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"};

@@ -1,4 +1,4 @@
-package day6;
+package day06;
 
 import iDay.IDay;
 
@@ -7,10 +7,10 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class Day6 implements IDay {
+public class Day06 implements IDay {
     @Override
     public long part1() throws IOException {
-        File file = new File("src/day6/input.txt");
+        File file = new File("src/day06/input.txt");
         Scanner in = new Scanner(file);
 
         String[] line1Values = in.nextLine().trim().replaceAll(" +", " ").split(" ");
@@ -38,7 +38,7 @@ public class Day6 implements IDay {
 
     @Override
     public long part2() throws IOException {
-        File file = new File("src/day6/input.txt");
+        File file = new File("src/day06/input.txt");
         Scanner in = new Scanner(file);
 
         String line1 = in.nextLine().trim().replaceAll(" +", " ");

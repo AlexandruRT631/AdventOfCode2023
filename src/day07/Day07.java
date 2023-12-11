@@ -1,4 +1,4 @@
-package day7;
+package day07;
 
 import iDay.IDay;
 
@@ -8,10 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class Day7 implements IDay {
+public class Day07 implements IDay {
     @Override
     public long part1() throws IOException {
-        File file = new File("src/day7/input.txt");
+        File file = new File("src/day07/input.txt");
         Scanner in = new Scanner(file);
         List<Hand> hands = new ArrayList<>();
 
@@ -32,7 +32,7 @@ public class Day7 implements IDay {
 
     @Override
     public long part2() throws IOException {
-        File file = new File("src/day7/input.txt");
+        File file = new File("src/day07/input.txt");
         Scanner in = new Scanner(file);
         List<Hand> hands = new ArrayList<>();
 

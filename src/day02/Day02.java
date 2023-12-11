@@ -1,4 +1,4 @@
-package day2;
+package day02;
 
 import iDay.IDay;
 
@@ -6,10 +6,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class Day2 implements IDay {
+public class Day02 implements IDay {
     @Override
     public long part1() throws IOException {
-        File file = new File("src/day2/input.txt");
+        File file = new File("src/day02/input.txt");
         Scanner in = new Scanner(file);
 
         int maxRed = 12;
@@ -60,7 +60,7 @@ public class Day2 implements IDay {
 
     @Override
     public long part2() throws IOException {
-        File file = new File("src/day2/input.txt");
+        File file = new File("src/day02/input.txt");
         Scanner in = new Scanner(file);
 
         long sum = 0;

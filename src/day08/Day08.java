@@ -1,4 +1,4 @@
-package day8;
+package day08;
 
 import iDay.IDay;
 
@@ -6,10 +6,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
-public class Day8 implements IDay {
+public class Day08 implements IDay {
     @Override
     public long part1() throws IOException {
-        File file = new File("src/day8/input.txt");
+        File file = new File("src/day08/input.txt");
         Scanner in = new Scanner(file);
         Dictionary<String, LeftRight> node = new Hashtable<>();
         int instruction = 0;
@@ -49,7 +49,7 @@ public class Day8 implements IDay {
 
     @Override
     public long part2() throws IOException {
-        File file = new File("src/day8/input.txt");
+        File file = new File("src/day08/input.txt");
         Scanner in = new Scanner(file);
         int instruction = 0;
         int totalInstructions = 0;

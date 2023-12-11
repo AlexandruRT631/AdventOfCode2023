@@ -1,4 +1,4 @@
-package day4;
+package day04;
 
 import iDay.IDay;
 
@@ -8,10 +8,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
-public class Day4 implements IDay {
+public class Day04 implements IDay {
     @Override
     public long part1() throws IOException {
-        File file = new File("src/day4/input.txt");
+        File file = new File("src/day04/input.txt");
         Scanner in = new Scanner(file);
 
         int totalPoints = 0;
@@ -28,7 +28,7 @@ public class Day4 implements IDay {
 
     @Override
     public long part2() throws IOException {
-        File file = new File("src/day4/input.txt");
+        File file = new File("src/day04/input.txt");
         Scanner in = new Scanner(file);
 
         int totalScratchcards = 0;

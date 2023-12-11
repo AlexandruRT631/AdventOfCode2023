@@ -1,4 +1,4 @@
-package day5;
+package day05;
 
 import iDay.IDay;
 
@@ -6,10 +6,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
-public class Day5 implements IDay {
+public class Day05 implements IDay {
     @Override
     public long part1() throws IOException {
-        File file = new File("src/day5/input.txt");
+        File file = new File("src/day05/input.txt");
         Scanner in = new Scanner(file);
 
         String seedsLine = in.nextLine().substring(7);
@@ -48,7 +48,7 @@ public class Day5 implements IDay {
 
     @Override
     public long part2() throws IOException {
-        File file = new File("src/day5/input.txt");
+        File file = new File("src/day05/input.txt");
         Scanner in = new Scanner(file);
 
         String seedsLine = in.nextLine().substring(7);
@@ -85,8 +85,8 @@ public class Day5 implements IDay {
         long min = Long.MAX_VALUE;
 
         for (Range r : ranges) {
-            if (r.getStart() < min) {
-                min = r.getStart();
+            if (r.start() < min) {
+                min = r.start();
             }
         }
 
@@ -101,21 +101,21 @@ public class Day5 implements IDay {
             for (Map m : maps) {
                 List<Range> newTempRanges = new ArrayList<>();
                 for (Range tempRange: tempRanges) {
-                    if (tempRange.getStart() < m.getSourceStart() && tempRange.getEnd() <= m.getSourceEnd() && m.getSourceStart() < tempRange.getEnd()) {
-                        newTempRanges.add(new Range(tempRange.getStart(), m.getSourceStart() - 1));
-                        result.add(new Range(m.getSourceStart() + m.getIncrement(), tempRange.getEnd() + m.getIncrement()));
+                    if (tempRange.start() < m.sourceStart() && tempRange.end() <= m.sourceEnd() && m.sourceStart() < tempRange.end()) {
+                        newTempRanges.add(new Range(tempRange.start(), m.sourceStart() - 1));
+                        result.add(new Range(m.sourceStart() + m.increment(), tempRange.end() + m.increment()));
                     }
-                    else if (m.getSourceStart() < tempRange.getStart() && m.getSourceEnd() <= tempRange.getEnd() && tempRange.getStart() < m.getSourceEnd()) {
-                        result.add(new Range(tempRange.getStart() + m.getIncrement(), tempRange.getEnd() + m.getIncrement()));
-                        newTempRanges.add(new Range(m.getSourceEnd() + 1, tempRange.getEnd()));
+                    else if (m.sourceStart() < tempRange.start() && m.sourceEnd() <= tempRange.end() && tempRange.start() < m.sourceEnd()) {
+                        result.add(new Range(tempRange.start() + m.increment(), tempRange.end() + m.increment()));
+                        newTempRanges.add(new Range(m.sourceEnd() + 1, tempRange.end()));
                     }
-                    else if (m.getSourceStart() <= tempRange.getStart() && tempRange.getEnd() <= m.getSourceEnd()) {
-                        result.add(new Range(tempRange.getStart() + m.getIncrement(), tempRange.getEnd() + m.getIncrement()));
+                    else if (m.sourceStart() <= tempRange.start() && tempRange.end() <= m.sourceEnd()) {
+                        result.add(new Range(tempRange.start() + m.increment(), tempRange.end() + m.increment()));
                     }
-                    else if (tempRange.getStart() <= m.getSourceStart() && m.getSourceEnd() <= tempRange.getEnd()) {
-                        newTempRanges.add(new Range(tempRange.getStart(), m.getSourceStart() - 1));
-                        result.add(new Range(m.getSourceStart() + m.getIncrement(), m.getSourceEnd() + m.getIncrement()));
-                        newTempRanges.add(new Range(m.getSourceEnd() + 1, tempRange.getEnd()));
+                    else if (tempRange.start() <= m.sourceStart() && m.sourceEnd() <= tempRange.end()) {
+                        newTempRanges.add(new Range(tempRange.start(), m.sourceStart() - 1));
+                        result.add(new Range(m.sourceStart() + m.increment(), m.sourceEnd() + m.increment()));
+                        newTempRanges.add(new Range(m.sourceEnd() + 1, tempRange.end()));
                     }
                     else {
                         newTempRanges.add(tempRange);
